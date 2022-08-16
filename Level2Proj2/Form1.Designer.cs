@@ -32,6 +32,7 @@ namespace Level2Proj2
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
+            this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // panel1
@@ -47,6 +48,11 @@ namespace Level2Proj2
             this.Tmr_Movement.Enabled = true;
             this.Tmr_Movement.Interval = 10;
             this.Tmr_Movement.Tick += new System.EventHandler(this.Tmr_Movement_Tick);
+            // 
+            // Tmr_Proj
+            // 
+            this.Tmr_Proj.Enabled = true;
+            this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
             // 
             // Form1
             // 
@@ -67,6 +73,7 @@ namespace Level2Proj2
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer Tmr_Movement;
+        private System.Windows.Forms.Timer Tmr_Proj;
     }
 }
 

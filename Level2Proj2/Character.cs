@@ -12,11 +12,16 @@ using System.Drawing.Drawing2D;
 
 namespace Level2Proj2
 {
+   
+
     class Player
     {
-        public int x, y, width, height;
+        private int x, y, width, height;
         public Rectangle character;
-        public string Name= "Character";
-
+        public string Name = "Character";
+    }
+    public Player()
+    {
+        
     }
 }

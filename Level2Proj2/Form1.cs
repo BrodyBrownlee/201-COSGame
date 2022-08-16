@@ -15,9 +15,17 @@ namespace Level2Proj2
     public partial class Form1 : Form
     {
         Graphics g;
-
-        public int speed, roomx, roomy, x = 50, y = 50;
+        
+        public int speed, roomx, roomy;
         public bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
+
+
+        Projectile[] bulletl = new Projectile[16];
+        Projectile[] bulletr = new Projectile[16];
+        Projectile[] bulletu = new Projectile[16];
+        Projectile[] bulletd = new Projectile[16];
+
+
         Player Character = new Player();
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -57,29 +65,48 @@ namespace Level2Proj2
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            Character.character = new Rectangle(x, y, 60, 60);
-            g.FillRectangle(Brushes.Black, Character.character);
+            Character.character = new Rectangle(Character.x, Character.y, 60, 60);
+          
         }
 
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
             if (right)
             {
-                x += 2;
+                Character.x += 2;
             }
             if (left)
             {
-                x -= 2;
+                Character.x -= 2;
             }
             if (up)
             {
-                y -= 2;
+                Character.y -= 2;
             }
             if (down)
             {
-                y += 2;
+                Character.y += 2;
             }
             panel1.Invalidate();
+        }
+        private void Tmr_Proj_Tick(object sender, EventArgs e)
+        {
+            if (upshoot)
+            {
+                
+            }
+            if (downshoot)
+            {
+
+            }
+            if (leftshoot)
+            {
+
+            }
+            if (rightshoot)
+            {
+
+            }
         }
     }
 }

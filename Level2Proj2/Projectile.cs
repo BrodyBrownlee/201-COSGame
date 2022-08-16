@@ -12,10 +12,15 @@ namespace Level2Proj2
 {
     class Projectile
     {
-        public Rectangle[] bulletl;
-        public Rectangle[] bulletr;
-        public Rectangle[] bulletu;
-        public Rectangle[] bulletd;
+        public int x, y, height, width;
+        public Rectangle projRec;
 
     }
+    public Projectile(Rectangle projRec)
+    {
+        x = .x + 37;
+        y
+    }
+
+        
 }

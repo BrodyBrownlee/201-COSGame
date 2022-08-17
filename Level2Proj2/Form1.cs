@@ -16,8 +16,10 @@ namespace Level2Proj2
     {
         Graphics g;
         
-        public int speed, roomx, roomy;
-        public bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
+        int speed, roomx, roomy, x,y;
+        bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
+        string move;
+
 
 
         Projectile[] bulletl = new Projectile[16];
@@ -65,7 +67,7 @@ namespace Level2Proj2
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
-            Character.character = new Rectangle(Character.x, Character.y, 60, 60);
+            Character.Drawplayer(g);
           
         }
 
@@ -73,19 +75,24 @@ namespace Level2Proj2
         {
             if (right)
             {
-                Character.x += 2;
+                move = "right";
+                Character.Movecharacter(move);
+
             }
             if (left)
             {
-                Character.x -= 2;
+                move = "left";
+                Character.Movecharacter(move);
             }
             if (up)
             {
-                Character.y -= 2;
+                move = "up";
+                Character.Movecharacter(move);
             }
             if (down)
             {
-                Character.y += 2;
+                move = "down";
+                Character.Movecharacter(move);
             }
             panel1.Invalidate();
         }

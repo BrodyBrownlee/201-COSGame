@@ -16,11 +16,10 @@ namespace Level2Proj2
         public Rectangle projRec;
 
     }
-    public Projectile(Rectangle projRec)
+    /*public Projectile(Rectangle projRec)
     {
-        x = .x + 37;
-        y
-    }
+       
+    }*/
 
         
 }

@@ -98,6 +98,7 @@ namespace Level2Proj2
         }
         private void Tmr_Proj_Tick(object sender, EventArgs e)
         {
+            lblData.Text = Character.character.X + "";
             if (upshoot)
             {
                 

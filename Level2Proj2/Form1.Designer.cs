@@ -33,10 +33,13 @@ namespace Level2Proj2
             this.panel1 = new System.Windows.Forms.Panel();
             this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
             this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
+            this.lblData = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblData);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(799, 451);
@@ -54,6 +57,15 @@ namespace Level2Proj2
             this.Tmr_Proj.Enabled = true;
             this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
             // 
+            // lblData
+            // 
+            this.lblData.AutoSize = true;
+            this.lblData.Location = new System.Drawing.Point(535, 93);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(35, 13);
+            this.lblData.TabIndex = 0;
+            this.lblData.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -65,6 +77,8 @@ namespace Level2Proj2
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -74,6 +88,7 @@ namespace Level2Proj2
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer Tmr_Movement;
         private System.Windows.Forms.Timer Tmr_Proj;
+        private System.Windows.Forms.Label lblData;
     }
 }
 

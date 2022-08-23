@@ -18,16 +18,12 @@ namespace Level2Proj2
         
         int speed, roomx, roomy, x,y;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
-        string move;
+        string move,shoot;
 
-
-
-        Projectile[] bulletl = new Projectile[16];
-        Projectile[] bulletr = new Projectile[16];
-        Projectile[] bulletu = new Projectile[16];
-        Projectile[] bulletd = new Projectile[16];
-
-
+        Projectile[] Bulletl = new Projectile[16];
+        Projectile[] Bulletr = new Projectile[16];
+        Projectile[] Bulletu = new Projectile[16];
+        Projectile[] Bulletd = new Projectile[16];
         Player Character = new Player();
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -68,7 +64,8 @@ namespace Level2Proj2
         {
             g = e.Graphics;
             Character.Drawplayer(g);
-          
+            Bulletd.Drawprojectile(g);
+
         }
 
         private void Tmr_Movement_Tick(object sender, EventArgs e)
@@ -98,22 +95,24 @@ namespace Level2Proj2
         }
         private void Tmr_Proj_Tick(object sender, EventArgs e)
         {
+           
             lblData.Text = Character.character.X + "";
             if (upshoot)
             {
-                
+                shoot = "up";
+
             }
             if (downshoot)
             {
-
+                shoot = "down";
             }
             if (leftshoot)
             {
-
+                shoot = "left";
             }
             if (rightshoot)
             {
-
+                shoot = "right";
             }
         }
     }

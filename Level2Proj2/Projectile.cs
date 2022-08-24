@@ -22,12 +22,25 @@ namespace Level2Proj2
         {
             x = 10;
             y = 360;
-
+            width = 5;
+            height = 5;
 
         }
 
 
-        public void Drawprojectile(Graphics g);
+        public void Drawprojectile(Graphics g)
+        {
+            for (int i = 0; i <= 15; i++)
+            {
+
+                g.FillRectangle(Brushes.Black, bulletd[i]);
+                g.FillRectangle(Brushes.Black, bulletl[i]);
+                g.FillRectangle(Brushes.Black, bulletr[i]);
+                g.FillRectangle(Brushes.Black, bulletu[i]);
+
+            }
+        }
+        
        
 
         public void Shootprojectile(string shoot)
@@ -36,19 +49,19 @@ namespace Level2Proj2
             {
                 if (shoot == "right")
                 {
-                    bulletr[i] = new Rectangle(x + 5, y + 5, 5, 5);
+                    bulletr[i] = new Rectangle(x + 5, y + 5,height, width);
                 }
                 if (shoot == "left")
                 {
-                    bulletl[i] = new Rectangle(x + 5, y + 5, 5, 5);
+                    bulletl[i] = new Rectangle(x + 5, y + 5,height, width);
                 }
                 if (shoot == "up")
                 {
-                    bulletu[i] = new Rectangle(x + 5, y + 5, 5, 5);
+                    bulletu[i] = new Rectangle(x + 5, y + 5,height, width);
                 }
                 if (shoot == "down")
                 {
-                    bulletd[i] = new Rectangle(x + 5, y + 5, 5, 5);
+                    bulletd[i] = new Rectangle(x + 5, y + 5,height, width);
                 }
             }
         }

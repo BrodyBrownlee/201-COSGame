@@ -63,8 +63,16 @@ namespace Level2Proj2
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
+            
             Character.Drawplayer(g);
-            Bulletd.Drawprojectile(g);
+            for (int i = 0; i <= 15; i++)
+            {
+                Bulletd[i].Drawprojectile(g);
+                Bulletu[i].Drawprojectile(g);
+                Bulletr[i].Drawprojectile(g);
+                Bulletl[i].Drawprojectile(g);
+            }
+              
 
         }
 
@@ -97,22 +105,28 @@ namespace Level2Proj2
         {
            
             lblData.Text = Character.character.X + "";
-            if (upshoot)
+            for (int i = 0; i <= 15; i++)
             {
-                shoot = "up";
-
-            }
-            if (downshoot)
-            {
-                shoot = "down";
-            }
-            if (leftshoot)
-            {
-                shoot = "left";
-            }
-            if (rightshoot)
-            {
-                shoot = "right";
+                if (upshoot)
+                {
+                    shoot = "up";
+                    Bulletu[i].Shootprojectile(shoot);
+                }
+                if (downshoot)
+                {
+                    shoot = "down";
+                    Bulletd[i].Shootprojectile(shoot);
+                }
+                if (leftshoot)
+                {
+                    shoot = "left";
+                    Bulletl[i].Shootprojectile(shoot);
+                }
+                if (rightshoot)
+                {
+                    shoot = "right";
+                    Bulletr[i].Shootprojectile(shoot);
+                }
             }
         }
     }

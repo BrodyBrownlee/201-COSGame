@@ -14,6 +14,7 @@ namespace Level2Proj2
     {
         public Rectangle projRec;
         int x, y, height, width;
+        string move, shoot;
         public Rectangle[] bulletl = new Rectangle[16];
         public Rectangle[] bulletr = new Rectangle[16];
         public Rectangle[] bulletu = new Rectangle[16];
@@ -40,8 +41,29 @@ namespace Level2Proj2
 
             }
         }
-        
-       
+       public void Moveprojectile(string move)
+        {
+            if (move == "right")
+            {
+                x += 5;
+               /* bulletr.Location = new Point(x, y);*/
+            }
+            if (move == "left")
+            {
+                x -= 5;
+               /* character.Location = new Point(x, y);*/
+            }
+            if (move == "up")
+            {
+                y -= 5;
+              /*  character.Location = new Point(x, y);*/
+            }
+            if (move == "down")
+            {
+                y += 5;
+                /*character.Location = new Point(x, y);*/
+            }
+        }
 
         public void Shootprojectile(string shoot)
         {
@@ -50,19 +72,24 @@ namespace Level2Proj2
                 if (shoot == "right")
                 {
                     bulletr[i] = new Rectangle(x + 5, y + 5,height, width);
+                    i++;
                 }
                 if (shoot == "left")
                 {
                     bulletl[i] = new Rectangle(x + 5, y + 5,height, width);
+                    i++;
                 }
                 if (shoot == "up")
                 {
                     bulletu[i] = new Rectangle(x + 5, y + 5,height, width);
+                    i++;
                 }
                 if (shoot == "down")
                 {
-                    bulletd[i] = new Rectangle(x + 5, y + 5,height, width);
+                    bulletd[i] = new Rectangle(x + 5, y + 5, height, width);
+                    i++;
                 }
+
             }
         }
 

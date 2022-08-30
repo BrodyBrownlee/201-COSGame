@@ -31,9 +31,9 @@ namespace Level2Proj2
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblData = new System.Windows.Forms.Label();
             this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
             this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
-            this.lblData = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,6 +46,16 @@ namespace Level2Proj2
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // lblData
+            // 
+            this.lblData.AutoSize = true;
+            this.lblData.Location = new System.Drawing.Point(535, 93);
+            this.lblData.Name = "lblData";
+            this.lblData.Size = new System.Drawing.Size(35, 13);
+            this.lblData.TabIndex = 0;
+            this.lblData.Text = "label1";
+            this.lblData.Click += new System.EventHandler(this.lblData_Click);
+            // 
             // Tmr_Movement
             // 
             this.Tmr_Movement.Enabled = true;
@@ -55,16 +65,8 @@ namespace Level2Proj2
             // Tmr_Proj
             // 
             this.Tmr_Proj.Enabled = true;
+            this.Tmr_Proj.Interval = 10;
             this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
-            // 
-            // lblData
-            // 
-            this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(535, 93);
-            this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(35, 13);
-            this.lblData.TabIndex = 0;
-            this.lblData.Text = "label1";
             // 
             // Form1
             // 

@@ -15,82 +15,62 @@ namespace Level2Proj2
         public Rectangle projRec;
         int x, y, height, width;
         string move, shoot;
-        public Rectangle[] bulletl = new Rectangle[16];
-        public Rectangle[] bulletr = new Rectangle[16];
-        public Rectangle[] bulletu = new Rectangle[16];
-        public Rectangle[] bulletd = new Rectangle[16];
-        public Projectile()
+        public Projectile(Rectangle characterRec)
         {
-            x = 10;
-            y = 360;
             width = 5;
             height = 5;
-
+            projRec = new Rectangle(x, y, width, height);
+            x = characterRec.X + characterRec.Width / 2;
+            y = characterRec.Y + characterRec.Height / 2;
         }
 
 
         public void Drawprojectile(Graphics g)
         {
-            for (int i = 0; i <= 15; i++)
-            {
-
-                g.FillRectangle(Brushes.Black, bulletd[i]);
-                g.FillRectangle(Brushes.Black, bulletl[i]);
-                g.FillRectangle(Brushes.Black, bulletr[i]);
-                g.FillRectangle(Brushes.Black, bulletu[i]);
-
-            }
+           
         }
-       public void Moveprojectile(string move)
+       public void Moveprojectile(string move, int speed)
         {
             if (move == "right")
             {
-                x += 5;
+                x += speed;
                /* bulletr.Location = new Point(x, y);*/
             }
             if (move == "left")
             {
-                x -= 5;
+                x -= speed;
                /* character.Location = new Point(x, y);*/
             }
             if (move == "up")
             {
-                y -= 5;
+                y -= speed;
               /*  character.Location = new Point(x, y);*/
             }
             if (move == "down")
             {
-                y += 5;
+                y += speed;
                 /*character.Location = new Point(x, y);*/
             }
         }
 
         public void Shootprojectile(string shoot)
         {
-            for (int i = 0; i <= 15; i++)
-            {
                 if (shoot == "right")
                 {
-                    bulletr[i] = new Rectangle(x + 5, y + 5,height, width);
-                    i++;
+                 
                 }
                 if (shoot == "left")
                 {
-                    bulletl[i] = new Rectangle(x + 5, y + 5,height, width);
-                    i++;
+              
                 }
                 if (shoot == "up")
                 {
-                    bulletu[i] = new Rectangle(x + 5, y + 5,height, width);
-                    i++;
+                   
                 }
                 if (shoot == "down")
                 {
-                    bulletd[i] = new Rectangle(x + 5, y + 5, height, width);
-                    i++;
-                }
-
-            }
+                 
+                } 
         }
 
     }

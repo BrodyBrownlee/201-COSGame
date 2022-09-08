@@ -19,8 +19,9 @@ namespace Level2Proj2
     class Player
     {
         private int x, y, width, height;
-
-        public Rectangle character;
+        public int speed;
+        public Rectangle characterRec;
+        public Image character;
         public string Name = "Character";
         public Player()
         {
@@ -28,36 +29,39 @@ namespace Level2Proj2
             y = 360;
             width = 40;
             height = 40;
-            character = new Rectangle(x, y, width, height);
+            speed = 5;
+            character = Properties.Resources.character;
+            characterRec = new Rectangle(x, y, width, height);
+            
         }
         public void Drawplayer(Graphics g)
         {
-            g.FillRectangle(Brushes.Red, character);
+            g.DrawImage(character, characterRec);
         }
 
         public void Movecharacter(string move)
         {
-            character.Location = new Point(x, y);
+            characterRec.Location = new Point(x, y);
 
             if (move == "right")
             {
-                x += 5;
-                character.Location = new Point(x, y);
+                x += speed;
+                characterRec.Location = new Point(x, y);
             }
             if (move == "left")
             {
-                x -= 5;
-                character.Location = new Point(x, y);
+                x -= speed;
+                characterRec.Location = new Point(x, y);
             }
             if (move == "up")
             {
-                y -= 5;
-                character.Location = new Point(x, y);
+                y -= speed;
+                characterRec.Location = new Point(x, y);
             }
             if (move == "down")
             {
-                y += 5;
-                character.Location = new Point(x, y);
+                y += speed;
+                characterRec.Location = new Point(x, y);
             }
 
 

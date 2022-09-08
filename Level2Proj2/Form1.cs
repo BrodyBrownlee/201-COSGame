@@ -25,13 +25,8 @@ namespace Level2Proj2
         {
 
         }
-
-        Projectile[] Bulletl = new Projectile[16];
-        Projectile[] Bulletr = new Projectile[16];
-        Projectile[] Bulletu = new Projectile[16];
-        Projectile[] Bulletd = new Projectile[16];
         List<Projectile> bullets = new List<Projectile>();
-        Player Character = new Player();
+        Player Character = new Player(); //making my player object
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { up = true; }
@@ -59,7 +54,7 @@ namespace Level2Proj2
         public Form1()
         {
             InitializeComponent();
-            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true }); // removing flickering from my panel
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -72,12 +67,9 @@ namespace Level2Proj2
             g = e.Graphics;
             
             Character.Drawplayer(g);
-            for (int i = 0; i <= 15; i++)
+            foreach  (Projectile p in bullets)
             {
-                Bulletd[i].Drawprojectile(g);
-                Bulletu[i].Drawprojectile(g);
-                Bulletr[i].Drawprojectile(g);
-                Bulletl[i].Drawprojectile(g);
+                p.Drawprojectile(g);
             }
               
 
@@ -85,16 +77,12 @@ namespace Level2Proj2
 
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 15; i++)
-            {
+            
                 if (right)
                 {
                     move = "right";
                     Character.Movecharacter(move);
-                    Bulletr[i].Moveprojectile(move);
-                    Bulletl[i].Moveprojectile(move);
-                    Bulletu[i].Moveprojectile(move);
-                    Bulletd[i].Moveprojectile(move);
+          
 
                 }
          
@@ -102,104 +90,93 @@ namespace Level2Proj2
             {
                 move = "left";
                 Character.Movecharacter(move);
-                    Bulletr[i].Moveprojectile(move);
-                    Bulletl[i].Moveprojectile(move);
-                    Bulletu[i].Moveprojectile(move);
-                    Bulletd[i].Moveprojectile(move);
+
                 }
             if (up)
             {
                 move = "up";
                 Character.Movecharacter(move);
-                    Bulletr[i].Moveprojectile(move);
-                    Bulletl[i].Moveprojectile(move);
-                    Bulletu[i].Moveprojectile(move);
-                    Bulletd[i].Moveprojectile(move);
+     
                 }
             if (down)
             {
                 move = "down";
                 Character.Movecharacter(move);
-                    Bulletr[i].Moveprojectile(move);
-                    Bulletl[i].Moveprojectile(move);
-                    Bulletu[i].Moveprojectile(move);
-                    Bulletd[i].Moveprojectile(move);
-                }
+
             }
+            
             panel1.Invalidate();
         }
         private void Tmr_Proj_Tick(object sender, EventArgs e)
         {
-
             lblData.Text = NumberOfProjectiles + "";
-            for (int i = 0; i <= 15; i++)
+
+            if (right)
             {
+                move = "right";
+                Character.Movecharacter(move);
+
+
+            }
+
+            if (left)
+            {
+                move = "left";
+                Character.Movecharacter(move);
+
+            }
+            if (up)
+            {
+                move = "up";
+                Character.Movecharacter(move);
+
+            }
+            if (down)
+            {
+                move = "down";
+                Character.Movecharacter(move);
+
+
+            }
+            if (NumberOfProjectiles > 0)
+            {
+                
                 if (upshoot)
                 {
                     NumberOfProjectiles--;
-                    if (NumberOfProjectiles != 0)
-                    {
+
                         shoot = "up";
-                        Bulletu[i].Shootprojectile(shoot);
-                        upshoot = false;
-                        i++;
-                    }
-                    else
-                    {
-                        NumberOfProjectiles += 10;
-                    }
-                   
-                   
+                    upshoot = false;
                 }
                 if (downshoot)
                 {
                     NumberOfProjectiles--;
-                    if (NumberOfProjectiles != 0)
-                    {
+                
                         shoot = "down";
-                        Bulletd[i].Shootprojectile(shoot);
+
                         downshoot = false;
-                    }
-                    else
-                    {
-                        NumberOfProjectiles += 10;
-                    }
+                    
+                    
+                  
                 }
                 if (leftshoot)
                 {
                     NumberOfProjectiles--;
-                    if (NumberOfProjectiles != 0)
-                    {
+                
                         shoot = "left";
-                        Bulletl[i].Shootprojectile(shoot);
-                        leftshoot = false;
-                    }
-                    else
-                    {
-                        NumberOfProjectiles += 10;
-                    }
+                    leftshoot = false;
                 }
                 if (rightshoot)
                 {
                     NumberOfProjectiles--;
-                    if (NumberOfProjectiles != 0)
-                    {
                         shoot = "right";
-                        Bulletr[i].Shootprojectile(shoot);
+                    bullets.Add(new Projectile(Character.characterRec));
                         rightshoot = false;
-                    }
-                    else
-                    {
-                        NumberOfProjectiles += 10;
-                    }
                 }
-
-                Bulletu[i].bulletu[i].Y -= 8;
-                Bulletd[i].bulletd[i].Y += 8;
-                Bulletr[i].bulletr[i].X += 8;
-                Bulletl[i].bulletl[i].X -= 8;
-
-
+                if(NumberOfProjectiles == 0)
+                {
+                    NumberOfProjectiles += 10;
+                }
             }
         }
     }

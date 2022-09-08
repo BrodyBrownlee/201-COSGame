@@ -15,7 +15,8 @@ namespace Level2Proj2
         public Rectangle projRec;
         int x, y, height, width;
         string move, shoot;
-        public Projectile(Rectangle characterRec)
+        Point centerProj;
+        public Projectile(Rectangle characterRec, int )
         {
             width = 5;
             height = 5;
@@ -27,29 +28,30 @@ namespace Level2Proj2
 
         public void Drawprojectile(Graphics g)
         {
-           
+            g.FillRectangle(Brushes.Black, projRec);
         }
        public void Moveprojectile(string move, int speed)
         {
             if (move == "right")
             {
                 x += speed;
-               /* bulletr.Location = new Point(x, y);*/
+                projRec.Location = new Point(x, y);
+            
             }
             if (move == "left")
             {
                 x -= speed;
-               /* character.Location = new Point(x, y);*/
+                projRec.Location = new Point(x, y);
             }
             if (move == "up")
             {
                 y -= speed;
-              /*  character.Location = new Point(x, y);*/
+                projRec.Location = new Point(x, y);
             }
             if (move == "down")
             {
                 y += speed;
-                /*character.Location = new Point(x, y);*/
+                projRec.Location = new Point(x, y);
             }
         }
 

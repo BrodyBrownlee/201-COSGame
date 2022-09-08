@@ -21,12 +21,30 @@ namespace Level2Proj2
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
         string move,shoot;
 
+       
+        List<Projectile> bullets = new List<Projectile>();
+        Player Character = new Player(); //making my player object
+        public Form1()
+        {
+            InitializeComponent();
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true }); // removing flickering from my panel
+        }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            g = e.Graphics;
+            Character.Drawplayer(g);
+            foreach (Projectile p in bullets)
+            {
+                p.Drawprojectile(g);
+            }
+
+
+        }
+
         private void lblData_Click(object sender, EventArgs e)
         {
 
         }
-        List<Projectile> bullets = new List<Projectile>();
-        Player Character = new Player(); //making my player object
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) { up = true; }
@@ -51,30 +69,14 @@ namespace Level2Proj2
             if (e.KeyData == Keys.D) { rightshoot = false; }
         }
 
-        public Form1()
-        {
-            InitializeComponent();
-            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true }); // removing flickering from my panel
-        }
+     
 
         private void Form1_Load(object sender, EventArgs e)
         {
              
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            g = e.Graphics;
-            
-            Character.Drawplayer(g);
-            foreach  (Projectile p in bullets)
-            {
-                p.Drawprojectile(g);
-            }
-              
-
-        }
-
+        
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
             
@@ -144,8 +146,8 @@ namespace Level2Proj2
                 if (upshoot)
                 {
                     NumberOfProjectiles--;
-
-                        shoot = "up";
+                    bullets.Add(new Projectile(Character.characterRec));
+                    shoot = "up";
                     upshoot = false;
                 }
                 if (downshoot)
@@ -153,8 +155,8 @@ namespace Level2Proj2
                     NumberOfProjectiles--;
                 
                         shoot = "down";
-
-                        downshoot = false;
+                    bullets.Add(new Projectile(Character.characterRec));
+                    downshoot = false;
                     
                     
                   
@@ -162,8 +164,8 @@ namespace Level2Proj2
                 if (leftshoot)
                 {
                     NumberOfProjectiles--;
-                
-                        shoot = "left";
+                    bullets.Add(new Projectile(Character.characterRec));
+                    shoot = "left";
                     leftshoot = false;
                 }
                 if (rightshoot)

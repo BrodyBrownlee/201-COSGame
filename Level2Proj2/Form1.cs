@@ -20,6 +20,8 @@ namespace Level2Proj2
         int NumberOfProjectiles = 10;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
         string move,shoot;
+        int angle;
+        int pnlWidth, pnlHeight; 
 
        
         List<Projectile> bullets = new List<Projectile>();
@@ -79,12 +81,13 @@ namespace Level2Proj2
         
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
-            
-                if (right)
+            pnlWidth = panel1.Width;
+            pnlHeight = panel1.Height;
+            if (right)
                 {
                     move = "right";
                     Character.Movecharacter(move);
-          
+                   
 
                 }
          
@@ -92,19 +95,20 @@ namespace Level2Proj2
             {
                 move = "left";
                 Character.Movecharacter(move);
-
-                }
+              
+            }
             if (up)
             {
+
                 move = "up";
                 Character.Movecharacter(move);
-     
+               
                 }
             if (down)
             {
                 move = "down";
                 Character.Movecharacter(move);
-
+            
             }
             
             panel1.Invalidate();
@@ -113,33 +117,6 @@ namespace Level2Proj2
         {
             lblData.Text = NumberOfProjectiles + "";
 
-            if (right)
-            {
-                move = "right";
-                Character.Movecharacter(move);
-
-
-            }
-
-            if (left)
-            {
-                move = "left";
-                Character.Movecharacter(move);
-
-            }
-            if (up)
-            {
-                move = "up";
-                Character.Movecharacter(move);
-
-            }
-            if (down)
-            {
-                move = "down";
-                Character.Movecharacter(move);
-
-
-            }
             if (NumberOfProjectiles > 0)
             {
                 
@@ -149,6 +126,7 @@ namespace Level2Proj2
                     bullets.Add(new Projectile(Character.characterRec));
                     shoot = "up";
                     upshoot = false;
+                    angle = 0;
                 }
                 if (downshoot)
                 {
@@ -157,9 +135,9 @@ namespace Level2Proj2
                         shoot = "down";
                     bullets.Add(new Projectile(Character.characterRec));
                     downshoot = false;
-                    
-                    
-                  
+                    angle = 180;
+
+
                 }
                 if (leftshoot)
                 {
@@ -167,13 +145,16 @@ namespace Level2Proj2
                     bullets.Add(new Projectile(Character.characterRec));
                     shoot = "left";
                     leftshoot = false;
+                    angle = 270;
                 }
                 if (rightshoot)
                 {
-                    NumberOfProjectiles--;
+                   
                         shoot = "right";
                     bullets.Add(new Projectile(Character.characterRec));
                         rightshoot = false;
+                    angle = 90;
+                    NumberOfProjectiles--;
                 }
                 if(NumberOfProjectiles == 0)
                 {

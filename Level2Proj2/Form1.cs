@@ -31,18 +31,7 @@ namespace Level2Proj2
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true }); // removing flickering from my panel
         }
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            g = e.Graphics;
-            Character.Drawplayer(g);
-            foreach (Projectile p in bullets)
-            {
-                p.Drawprojectile(g);
-            }
-
-
-        }
-
+       
         private void lblData_Click(object sender, EventArgs e)
         {
 
@@ -123,7 +112,7 @@ namespace Level2Proj2
                 if (upshoot)
                 {
                     NumberOfProjectiles--;
-                    bullets.Add(new Projectile(Character.characterRec));
+                    bullets.Add(new Projectile(Character.characterRec, angle));
                     shoot = "up";
                     upshoot = false;
                     angle = 0;
@@ -133,7 +122,7 @@ namespace Level2Proj2
                     NumberOfProjectiles--;
                 
                         shoot = "down";
-                    bullets.Add(new Projectile(Character.characterRec));
+                    bullets.Add(new Projectile(Character.characterRec, angle));
                     downshoot = false;
                     angle = 180;
 
@@ -142,7 +131,7 @@ namespace Level2Proj2
                 if (leftshoot)
                 {
                     NumberOfProjectiles--;
-                    bullets.Add(new Projectile(Character.characterRec));
+                    bullets.Add(new Projectile(Character.characterRec, angle));
                     shoot = "left";
                     leftshoot = false;
                     angle = 270;
@@ -151,7 +140,7 @@ namespace Level2Proj2
                 {
                    
                         shoot = "right";
-                    bullets.Add(new Projectile(Character.characterRec));
+                    bullets.Add(new Projectile(Character.characterRec, angle));
                         rightshoot = false;
                     angle = 90;
                     NumberOfProjectiles--;
@@ -160,7 +149,27 @@ namespace Level2Proj2
                 {
                     NumberOfProjectiles += 10;
                 }
+                panel1.Invalidate();
             }
+
         }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            g = e.Graphics;
+            Character.Drawplayer(g);
+            foreach (Projectile p in bullets)
+            {
+                p.Drawprojectile(g);
+                p.Shootprojectile(shoot);
+                if (p.projRec.X > ClientSize.Width || p.projRec.X < 0 || p.projRec.Y < 0 || p.projRec.Y > ClientSize.Height)
+                {
+                    bullets.Remove(p);
+                    break;
+                }
+            }
+
+
+        }
+
     }
 }

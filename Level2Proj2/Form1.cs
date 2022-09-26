@@ -16,7 +16,7 @@ namespace Level2Proj2
     {
         Graphics g;
 
-        int roomx, roomy;
+        int roomx = 0, roomy = 0;
         int NumberOfProjectiles = 10;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
         string move,shoot;
@@ -66,24 +66,24 @@ namespace Level2Proj2
             if (right)
             {
                 move = "right";
-                Character.Movecharacter(move);
+                Character.Movecharacter(move, pnlHeight, pnlWidth);
             }
          
             if (left)
             {
                 move = "left";
-                Character.Movecharacter(move);
+                Character.Movecharacter(move, pnlHeight, pnlWidth);
               
             }
             if (up)
             {
                 move = "up";
-                Character.Movecharacter(move);
+                Character.Movecharacter(move, pnlHeight, pnlWidth);
                 }
             if (down)
             {
                 move = "down";
-                Character.Movecharacter(move);
+                Character.Movecharacter(move, pnlHeight, pnlWidth);
             }
             
             panel1.Invalidate();

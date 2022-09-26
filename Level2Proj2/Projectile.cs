@@ -56,11 +56,13 @@ namespace Level2Proj2
 
         public void Drawprojectile(Graphics g)
         {
+            //drawing the projectiles onto the screen 
             projRec = new Rectangle(x, y , width, height);
             g.FillRectangle(Brushes.Black, projRec);
         }
         public void Shootprojectile(string shoot)
         {
+            //applying the speed of the bullet once it is created 
             x += (int)xSpeed;
             y -= (int)ySpeed;
         }

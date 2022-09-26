@@ -39,31 +39,59 @@ namespace Level2Proj2
             g.DrawImage(character, characterRec);
         }
 
-        public void Movecharacter(string move)
+        public void Movecharacter(string move, int pnlHeight, int pnlWidth)
         {
             characterRec.Location = new Point(x, y);
-
-            if (move == "right")
+            if ( x < pnlWidth - 40)
             {
-                x += speed;
-                characterRec.Location = new Point(x, y);
+                if (move == "right")
+                {
+                    x += speed;
+                    characterRec.Location = new Point(x, y);
+                }
             }
-            if (move == "left")
+            else
             {
-                x -= speed;
-                characterRec.Location = new Point(x, y);
-            }
-            if (move == "up")
-            {
-                y -= speed;
-                characterRec.Location = new Point(x, y);
-            }
-            if (move == "down")
-            {
-                y += speed;
-                characterRec.Location = new Point(x, y);
+                x = 1;
             }
 
+            if (x > 0)
+            {
+                if (move == "left")
+                {
+                    x -= speed;
+                    characterRec.Location = new Point(x, y);
+                }
+            }
+            else
+            {
+                x = pnlWidth - 41;
+            }
+            if ( y > 0)
+            {
+                if (move == "up")
+                {
+                    y -= speed;
+                    characterRec.Location = new Point(x, y);
+                }
+            }
+            else
+            {
+                y = pnlHeight - 41;
+            }
+            if (y < pnlHeight - 40)
+            {
+                if (move == "down")
+                {
+                    y += speed;
+                    characterRec.Location = new Point(x, y);
+                }
+            }
+            else
+            {
+                y = 1;
+                
+            }
 
         }
 

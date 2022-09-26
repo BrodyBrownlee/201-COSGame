@@ -25,8 +25,8 @@ namespace Level2Proj2
         public string Name = "Character";
         public Player()
         {
-            x = 10;
-            y = 360;
+            x = 250;
+            y = 250;
             width = 40;
             height = 40;
             speed = 5;

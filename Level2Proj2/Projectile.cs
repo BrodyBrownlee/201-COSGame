@@ -19,36 +19,38 @@ namespace Level2Proj2
         Point centerProj;
         public Projectile(Rectangle characterRec, int angle)
         {
+            // aligning the bullets within the characters 
             if (angle == 0)
             {
-                width = 14;
-                height = 32;
-                x = characterRec.X + 18;
-                y = characterRec.Y - 28;
+                width = 7;
+                height = 16;
+                x = characterRec.X + 17;
+                y = characterRec.Y -16;
             }
             if (angle == 180)
             {
-                width = 14;
-                height = 32;
-                x = characterRec.X + 16;
-                y = characterRec.Y + 28;
+                width = 7;
+                height = 16;
+                x = characterRec.X + 17;
+                y = characterRec.Y + 56;
             }
             if (angle == 90)
             {
-                x = characterRec.X + 38; // move bullet to middle of player
-                y = characterRec.Y + 7;
-                width = 32;
-                height = 14;
+                x = characterRec.X + 40; 
+                y = characterRec.Y +20;
+                width = 16;
+                height = 7;
             }
             if (angle == 270)
             {
-                x = characterRec.X - 16; // move bullet to middle of player
-                y = characterRec.Y + 7;
-                width = 32;
-                height = 14;
+                x = characterRec.X; 
+                y = characterRec.Y + 20;
+                width = 16;
+                height = 7;
             }
-            xSpeed = 30 * (Math.Cos((angle - 90) * Math.PI / 180));
-            ySpeed = 30 * (Math.Sin((angle + 90) * Math.PI / 180));
+            //making the speed of the bullet based on it's angle 
+            xSpeed = 10 * (Math.Cos((angle - 90) * Math.PI / 180));
+            ySpeed = 10 * (Math.Sin((angle + 90) * Math.PI / 180));
         }
 
 
@@ -59,22 +61,6 @@ namespace Level2Proj2
         }
         public void Shootprojectile(string shoot)
         {
-                if (shoot == "right")
-                {
-                 
-                }
-                if (shoot == "left")
-                {
-              
-                }
-                if (shoot == "up")
-                {
-                   
-                }
-                if (shoot == "down")
-                {
-                 
-                }
             x += (int)xSpeed;
             y -= (int)ySpeed;
         }

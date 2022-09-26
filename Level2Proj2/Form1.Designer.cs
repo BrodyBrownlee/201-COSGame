@@ -65,7 +65,7 @@ namespace Level2Proj2
             // Tmr_Proj
             // 
             this.Tmr_Proj.Enabled = true;
-            this.Tmr_Proj.Interval = 10;
+            this.Tmr_Proj.Interval = 500;
             this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
             // 
             // Form1

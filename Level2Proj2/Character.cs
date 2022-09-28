@@ -23,6 +23,7 @@ namespace Level2Proj2
         public Rectangle characterRec;
         public Image character;
         public string Name = "Character";
+        public int roomx = 3, roomy = 3;
         public Player()
         {
             x = 250;
@@ -52,7 +53,11 @@ namespace Level2Proj2
             }
             else
             {
-                x = 1;
+                if (roomx <= 4)
+                {
+                    x = 1;
+                    roomx += 1;
+                }
             }
 
             if (x > 0)
@@ -65,7 +70,11 @@ namespace Level2Proj2
             }
             else
             {
-                x = pnlWidth - 41;
+                if (roomx > 0)
+                {
+                    x = pnlWidth - 41;
+                    roomx -= 1;
+                }
             }
             if ( y > 0)
             {
@@ -77,7 +86,12 @@ namespace Level2Proj2
             }
             else
             {
-                y = pnlHeight - 41;
+                if (roomy <= 4)
+                {
+                    y = pnlHeight - 41;
+                    roomy += 1;
+                }
+                
             }
             if (y < pnlHeight - 40)
             {
@@ -89,8 +103,11 @@ namespace Level2Proj2
             }
             else
             {
-                y = 1;
-                
+                if (roomy > 0)
+                {
+                    y = 1;
+                    roomy -= 1;
+                }
             }
 
         }

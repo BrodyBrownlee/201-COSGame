@@ -49,11 +49,12 @@ namespace Level2Proj2
             // lblData
             // 
             this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(535, 93);
+            this.lblData.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblData.Location = new System.Drawing.Point(616, 9);
             this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(35, 13);
+            this.lblData.Size = new System.Drawing.Size(172, 24);
             this.lblData.TabIndex = 0;
-            this.lblData.Text = "label1";
+            this.lblData.Text = "RoomX + RoomY";
             this.lblData.Click += new System.EventHandler(this.lblData_Click);
             // 
             // Tmr_Movement

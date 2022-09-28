@@ -52,8 +52,6 @@ namespace Level2Proj2
             xSpeed = 10 * (Math.Cos((angle - 90) * Math.PI / 180));
             ySpeed = 10 * (Math.Sin((angle + 90) * Math.PI / 180));
         }
-
-
         public void Drawprojectile(Graphics g)
         {
             //drawing the projectiles onto the screen 
@@ -66,7 +64,6 @@ namespace Level2Proj2
             x += (int)xSpeed;
             y -= (int)ySpeed;
         }
-
     }
 }
 

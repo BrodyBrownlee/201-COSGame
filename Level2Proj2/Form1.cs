@@ -15,8 +15,6 @@ namespace Level2Proj2
     public partial class Form1 : Form
     {
         Graphics g;
-
-        int roomx = 0, roomy = 0;
         int NumberOfProjectiles = 10;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
         string move,shoot;
@@ -31,7 +29,6 @@ namespace Level2Proj2
         }       
         private void lblData_Click(object sender, EventArgs e)
         {
-
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -57,10 +54,10 @@ namespace Level2Proj2
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-             
         }
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
+            lblData.Text = Character.roomx + "," + Character.roomy + "";
             pnlWidth = panel1.Width;
             pnlHeight = panel1.Height;
             if (right)
@@ -73,7 +70,6 @@ namespace Level2Proj2
             {
                 move = "left";
                 Character.Movecharacter(move, pnlHeight, pnlWidth);
-              
             }
             if (up)
             {
@@ -85,15 +81,12 @@ namespace Level2Proj2
                 move = "down";
                 Character.Movecharacter(move, pnlHeight, pnlWidth);
             }
-            
             panel1.Invalidate();
         }
         private void Tmr_Proj_Tick(object sender, EventArgs e)
         {
-            lblData.Text = NumberOfProjectiles + "";
             if (NumberOfProjectiles > 0)
-            {
-                
+            {       
                 if (upshoot)
                 {
                     angle = 0;

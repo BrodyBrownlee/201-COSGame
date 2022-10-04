@@ -20,8 +20,8 @@ namespace Level2Proj2
         string move,shoot;
         int angle;
         int pnlWidth, pnlHeight; 
-        List<Projectile> bullets = new List<Projectile>();
         Player Character = new Player(); //making my player object
+        Enemy Enemy = new Enemy();
         public Form1()
         {
             InitializeComponent();
@@ -92,7 +92,7 @@ namespace Level2Proj2
                     angle = 0;
                     shoot = "up";
                     NumberOfProjectiles--;
-                    bullets.Add(new Projectile(Character.characterRec, angle));
+                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
                     upshoot = false;
                 }
                 else if (downshoot)
@@ -100,7 +100,7 @@ namespace Level2Proj2
                     angle = 180;
                     NumberOfProjectiles--;
                     shoot = "down";
-                    bullets.Add(new Projectile(Character.characterRec, angle));
+                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
                     downshoot = false;
                 }
                 else if (leftshoot)
@@ -108,14 +108,14 @@ namespace Level2Proj2
                     angle = 270;
                     shoot = "left";
                     NumberOfProjectiles--;
-                    bullets.Add(new Projectile(Character.characterRec, angle));
+                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
                     leftshoot = false;
                 }
                 else if (rightshoot)
                 {
                     angle = 90;
                     shoot = "right";
-                    bullets.Add(new Projectile(Character.characterRec, angle));
+                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
                     rightshoot = false;
                     NumberOfProjectiles--;
                 }
@@ -130,13 +130,14 @@ namespace Level2Proj2
         {
             g = e.Graphics;
             Character.Drawplayer(g);
-            foreach (Projectile p in bullets)
+            Enemy.Drawenemy(g);
+            foreach (Projectile p in GlobalVariables.bullets)
             {
                 p.Drawprojectile(g);
                 p.Shootprojectile(shoot);
                 if (p.projRec.X > ClientSize.Width || p.projRec.X < 0 || p.projRec.Y < 0 || p.projRec.Y > ClientSize.Height)
                 {
-                    bullets.Remove(p);
+                    GlobalVariables.bullets.Remove(p);
                     break;
                 }
             }

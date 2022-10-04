@@ -57,6 +57,11 @@ namespace Level2Proj2
                 {
                     x = 1;
                     roomx += 1;
+                    foreach (Projectile p in GlobalVariables.bullets)
+                    {
+                        GlobalVariables.bullets.Remove(p);
+                        break;
+                    }
                 }
             }
 
@@ -74,6 +79,11 @@ namespace Level2Proj2
                 {
                     x = pnlWidth - 41;
                     roomx -= 1;
+                    foreach (Projectile p in GlobalVariables.bullets)
+                    {
+                        GlobalVariables.bullets.Remove(p);
+                        break;
+                    }
                 }
             }
             if ( y > 0)
@@ -90,6 +100,11 @@ namespace Level2Proj2
                 {
                     y = pnlHeight - 41;
                     roomy += 1;
+                    foreach (Projectile p in GlobalVariables.bullets)
+                    {
+                        GlobalVariables.bullets.Remove(p);
+                        break;
+                    }
                 }
                 
             }
@@ -107,6 +122,11 @@ namespace Level2Proj2
                 {
                     y = 1;
                     roomy -= 1;
+                    foreach (Projectile p in GlobalVariables.bullets)
+                    {
+                        GlobalVariables.bullets.Remove(p);
+                        break;
+                    }
                 }
             }
 

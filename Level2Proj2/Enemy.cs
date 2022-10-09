@@ -11,9 +11,9 @@ namespace Level2Proj2
     {
         private int x, y, width, height;
         public int speed;
-        public Rectangle[] enemyarray;
+        public Rectangle enemyRec;
         public Image enemy;
-        public string Name = "Character";
+        public string Name = "Enemy";
         public int roomx = 3, roomy = 3;
         public Enemy()
         {
@@ -21,20 +21,13 @@ namespace Level2Proj2
             y = 250;
             width = 40;
             height = 40;
-            speed = 5;
           /*  character = Properties.Resources.character;*/
-          for (int O = 1; O < 16; O++)
-            {
-                enemyarray[1] = new Rectangle(x, y, width, height);
-                x += 40;
-            }
         }
+        //drawing the enemy from the form function
         public void Drawenemy(Graphics g)
         {
-            for (int O = 1; O < 16; O++)
-            {
-                g.FillRectangle(Brushes.Blue, enemyarray[O]);
-            }    
+            enemyRec = new Rectangle(x, y, width, height);
+            g.FillRectangle(Brushes.Blue, enemyRec);
         }
     }
 }

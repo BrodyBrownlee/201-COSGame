@@ -12,10 +12,6 @@ using System.Drawing.Drawing2D;
 
 namespace Level2Proj2
 {
-
-  
-
-
     class Player
     {
         private int x, y, width, height;

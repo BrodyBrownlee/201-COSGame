@@ -15,13 +15,11 @@ namespace Level2Proj2
     public partial class Form1 : Form
     {
         Graphics g;
-        int NumberOfProjectiles = 10;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
         string move,shoot;
-        int angle;
-        int pnlWidth, pnlHeight; 
+        int angle, pnlWidth, pnlHeight, NumberOfProjectiles, NumberOfEnemies;
+        int[] enemyhp = new int[16];
         Player Character = new Player(); //making my player object
-        Enemy Enemy = new Enemy();
         public Form1()
         {
             InitializeComponent();
@@ -54,6 +52,9 @@ namespace Level2Proj2
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            NumberOfProjectiles = 10;
+            GlobalVariables.enemies.Add(new Enemy());
+            NumberOfEnemies += 1;
         }
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
@@ -130,7 +131,10 @@ namespace Level2Proj2
         {
             g = e.Graphics;
             Character.Drawplayer(g);
-            Enemy.Drawenemy(g);
+            foreach (Enemy O in GlobalVariables.enemies)
+            {
+                O.Drawenemy(g);
+            }
             foreach (Projectile p in GlobalVariables.bullets)
             {
                 p.Drawprojectile(g);
@@ -141,6 +145,13 @@ namespace Level2Proj2
                     break;
                 }
             }
+            foreach (Projectile p in GlobalVariables.bullets) foreach (Enemy O in GlobalVariables.enemies)
+                {
+                    if (p.projRec.IntersectsWith(O.enemyRec))
+                    {
+                       
+                    }
+                }
         }
     }
 }

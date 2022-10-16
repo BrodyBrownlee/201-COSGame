@@ -38,6 +38,7 @@ namespace Level2Proj2
             this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
             this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
             this.Tmr_Collision = new System.Windows.Forms.Timer(this.components);
+            this.Tmr_Door = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +110,12 @@ namespace Level2Proj2
             this.Tmr_Collision.Interval = 1;
             this.Tmr_Collision.Tick += new System.EventHandler(this.Tmr_Collision_Tick);
             // 
+            // Tmr_Door
+            // 
+            this.Tmr_Door.Enabled = true;
+            this.Tmr_Door.Interval = 1;
+            this.Tmr_Door.Tick += new System.EventHandler(this.Tmr_Door_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,6 +143,7 @@ namespace Level2Proj2
         private System.Windows.Forms.Label lblRems;
         private System.Windows.Forms.Label lblEnemyHP2;
         private System.Windows.Forms.Timer Tmr_Collision;
+        private System.Windows.Forms.Timer Tmr_Door;
     }
 }
 

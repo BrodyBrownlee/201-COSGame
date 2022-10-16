@@ -39,7 +39,6 @@ namespace Level2Proj2
         {
             g.DrawImage(character, characterRec);
         }
-
         public void Movecharacter(string move, int pnlHeight, int pnlWidth)
         {
             characterRec.Location = new Point(x, y);
@@ -149,23 +148,30 @@ namespace Level2Proj2
                 dspeed = 5;
                 uspeed = 5;
             }
-            if (move == "right")
+            else if (move == "right")
             {
                 rspeed = 0;
                 lspeed = 5;
                 dspeed = 5;
                 uspeed = 5;
             }
-            if (move == "up")
+            else if (move == "up")
             {
                 uspeed = 0;
                 rspeed = 5;
                 dspeed = 5;
                 lspeed = 5;
             }
-            if (move == "down")
+            else if (move == "down")
             {
                 dspeed = 0;
+                rspeed = 5;
+                lspeed = 5;
+                uspeed = 5;
+            }
+            else
+            {
+                dspeed = 5;
                 rspeed = 5;
                 lspeed = 5;
                 uspeed = 5;

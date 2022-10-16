@@ -15,19 +15,21 @@ namespace Level2Proj2
         public Image enemy;
         public string Name = "Enemy";
         public int roomx = 3, roomy = 3;
-        public Enemy()
+        public int enemyhp;
+        public Enemy(int xpos, int ypos, int enemywidth, int enemyheight)
         {
-            x = 250;
-            y = 250;
-            width = 40;
-            height = 40;
-          /*  character = Properties.Resources.character;*/
+            x = xpos;
+            y = ypos;
+            width = enemywidth;
+            height = enemyheight;
+            enemy = Properties.Resources.enemy;
+            enemyhp = 3;
+            enemyRec = new Rectangle(xpos, ypos, enemywidth, enemyheight);
         }
         //drawing the enemy from the form function
         public void Drawenemy(Graphics g)
         {
-            enemyRec = new Rectangle(x, y, width, height);
-            g.FillRectangle(Brushes.Blue, enemyRec);
+            g.DrawImage(enemy, enemyRec);
         }
     }
 }

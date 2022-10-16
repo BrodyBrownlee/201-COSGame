@@ -16,17 +16,18 @@ namespace Level2Proj2
     {
         Graphics g;
         bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot;
-        string move,shoot;
+        string move, shoot;
         int angle, pnlWidth, pnlHeight, NumberOfProjectiles, NumberOfEnemies;
-        int[] enemyhp = new int[16];
         Player Character = new Player(); //making my player object
+        Object[] Wall = new Object[16];
+        Rectangle[] UpS = new Rectangle[20];
+        Rectangle[] DownS = new Rectangle[20];
+        Rectangle[] RightS = new Rectangle[20];
+        Rectangle[] LeftS = new Rectangle[20];
         public Form1()
         {
             InitializeComponent();
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true }); // removing flickering from my panel
-        }       
-        private void lblData_Click(object sender, EventArgs e)
-        {
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -52,21 +53,56 @@ namespace Level2Proj2
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            NumberOfProjectiles = 10;
-            GlobalVariables.enemies.Add(new Enemy());
-            NumberOfEnemies += 1;
+            enterRoom();
+        }
+        private void Tmr_Collision_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if (Character.characterRec.IntersectsWith(UpS[i]))
+                {
+                    move = "left";
+                 Character.pCollision(move);
+                }
+                if (Character.characterRec.IntersectsWith(LeftS[i]))
+                {
+                    move = "right";
+                    Character.pCollision(move);
+                }
+                if (Character.characterRec.IntersectsWith(DownS[i]))
+                {
+                    move = "up";
+                    Character.pCollision(move);
+                }
+                if (Character.characterRec.IntersectsWith(UpS[i]))
+                {
+                    move = "down";
+                    Character.pCollision(move);
+                }   
+            }
+
+
         }
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
-            lblData.Text = Character.roomx + "," + Character.roomy + "";
+            lblData.Text = GlobalVariables.roomx + "," + GlobalVariables.roomy + "";
+            lblRems.Text = NumberOfEnemies + "";
             pnlWidth = panel1.Width;
+            try
+            {
+                lblEnemyHP.Text = "" + GlobalVariables.enemies[0].enemyhp;
+                lblEnemyHP2.Text = "" + GlobalVariables.enemies[1].enemyhp;
+            }
+            catch (Exception)
+            {
+            }
             pnlHeight = panel1.Height;
             if (right)
             {
                 move = "right";
                 Character.Movecharacter(move, pnlHeight, pnlWidth);
             }
-         
+
             if (left)
             {
                 move = "left";
@@ -76,7 +112,7 @@ namespace Level2Proj2
             {
                 move = "up";
                 Character.Movecharacter(move, pnlHeight, pnlWidth);
-                }
+            }
             if (down)
             {
                 move = "down";
@@ -86,51 +122,48 @@ namespace Level2Proj2
         }
         private void Tmr_Proj_Tick(object sender, EventArgs e)
         {
-            if (NumberOfProjectiles > 0)
-            {       
-                if (upshoot)
-                {
-                    angle = 0;
-                    shoot = "up";
-                    NumberOfProjectiles--;
-                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
-                    upshoot = false;
-                }
-                else if (downshoot)
-                {
-                    angle = 180;
-                    NumberOfProjectiles--;
-                    shoot = "down";
-                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
-                    downshoot = false;
-                }
-                else if (leftshoot)
-                {
-                    angle = 270;
-                    shoot = "left";
-                    NumberOfProjectiles--;
-                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
-                    leftshoot = false;
-                }
-                else if (rightshoot)
-                {
-                    angle = 90;
-                    shoot = "right";
-                    GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
-                    rightshoot = false;
-                    NumberOfProjectiles--;
-                }
-                if(NumberOfProjectiles == 0)
-                {
-                    NumberOfProjectiles += 10;
-                }
-                panel1.Invalidate();
+            if (upshoot)
+            {
+                angle = 0;
+                shoot = "up";
+                GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
             }
+            else if (downshoot)
+            {
+                angle = 180;
+                shoot = "down";
+                GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
+            }
+            else if (leftshoot)
+            {
+                angle = 270;
+                shoot = "left";
+                GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
+            }
+            else if (rightshoot)
+            {
+                angle = 90;
+                shoot = "right";
+                GlobalVariables.bullets.Add(new Projectile(Character.characterRec, angle));
+            }
+            panel1.Invalidate();
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             g = e.Graphics;
             Character.Drawplayer(g);
+            for (int i = 0; i < 8; i++)
+            {
+                Wall[i].drawObject(g);
+
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                g.FillRectangle(Brushes.Red, UpS[i]);
+                g.FillRectangle(Brushes.Green, LeftS[i]);
+                g.FillRectangle(Brushes.Blue, RightS[i]);
+                g.FillRectangle(Brushes.Yellow, DownS[i]);
+            }
             foreach (Enemy O in GlobalVariables.enemies)
             {
                 O.Drawenemy(g);
@@ -145,13 +178,46 @@ namespace Level2Proj2
                     break;
                 }
             }
-            foreach (Projectile p in GlobalVariables.bullets) foreach (Enemy O in GlobalVariables.enemies)
+            foreach (Enemy O in GlobalVariables.enemies.ToList()) foreach (Projectile p in GlobalVariables.bullets.ToList())
                 {
-                    if (p.projRec.IntersectsWith(O.enemyRec))
+
+                    for (int i = 0; i < GlobalVariables.enemies.Count; i++)
                     {
-                       
+                        if (p.projRec.IntersectsWith(GlobalVariables.enemies[i].enemyRec))
+                        {
+                            GlobalVariables.enemies[i].enemyhp -= 1;
+
+                            if (GlobalVariables.enemies[i].enemyhp <= 0)
+                            {
+                                GlobalVariables.enemies.RemoveAt(i);
+                                NumberOfEnemies -= 1;
+                                break;
+                            }
+                            GlobalVariables.bullets.Remove(p);
+                        }
                     }
                 }
+        }
+        private void enterRoom()
+        {
+            Wall[0] = new Object(50, 0, 325, 50);
+            Wall[1] = new Object(425, 0, 325, 50);
+            Wall[2] = new Object(0, 0, 50, 225);
+            Wall[3] = new Object(0, 275, 50, 200);
+            Wall[4] = new Object(50, 400, 325, 50);
+            Wall[5] = new Object(425, 400, 325, 50);
+            Wall[6] = new Object(750, 50, 50, 150);
+            Wall[7] = new Object(750, 250, 50, 200);
+            NumberOfEnemies += 2;
+            GlobalVariables.enemies.Add(new Enemy(200, 200, 40, 40));
+            GlobalVariables.enemies.Add(new Enemy(250, 250, 40, 40));
+            for (int i = 0;i < 8; i++)
+            {
+                UpS[i] = new Rectangle(Wall[i].wallRec.Left, Wall[i].wallRec.Top, Wall[i].wallRec.Width, 20);
+                RightS[i] = new Rectangle(Wall[i].wallRec.Right - 5, Wall[i].wallRec.Top + 5, 10, Wall[i].wallRec.Height - 5);
+                LeftS[i] = new Rectangle(Wall[i].wallRec.Left, Wall[i].wallRec.Top, 10, Wall[i].wallRec.Height);
+                DownS[i] = new Rectangle(Wall[i].wallRec.Left, Wall[i].wallRec.Bottom, Wall[i].wallRec.Width, 5);
+            }
         }
     }
 }

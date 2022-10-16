@@ -15,21 +15,25 @@ namespace Level2Proj2
     class Player
     {
         private int x, y, width, height;
-        public int speed;
+        public int lspeed,rspeed,uspeed,dspeed;
         public Rectangle characterRec;
         public Image character;
         public string Name = "Character";
-        public int roomx = 3, roomy = 3;
+        
         public Player()
         {
-            x = 250;
-            y = 250;
+            x = 350;
+            y = 200;
             width = 40;
             height = 40;
-            speed = 5;
+            lspeed = 5;
+            rspeed = 5;
+            uspeed = 5;
+            dspeed = 5;
             character = Properties.Resources.character;
             characterRec = new Rectangle(x, y, width, height);
-            
+            GlobalVariables.roomy = 3;
+            GlobalVariables.roomx = 3;
         }
         public void Drawplayer(Graphics g)
         {
@@ -39,46 +43,51 @@ namespace Level2Proj2
         public void Movecharacter(string move, int pnlHeight, int pnlWidth)
         {
             characterRec.Location = new Point(x, y);
-            if ( x < pnlWidth - 40)
+            if (x < pnlWidth - 40)
             {
                 if (move == "right")
-                {
-                    x += speed;
+                { 
+                    x += rspeed;
                     characterRec.Location = new Point(x, y);
                 }
             }
             else
             {
-                if (roomx <= 4)
+                if (GlobalVariables.enemies.Count == 0)
                 {
-                    x = 1;
-                    roomx += 1;
-                    foreach (Projectile p in GlobalVariables.bullets)
+                    if (GlobalVariables.roomx <= 4)
                     {
-                        GlobalVariables.bullets.Remove(p);
-                        break;
+                        x = 1;
+                        GlobalVariables.roomx += 1;
+                        foreach (Projectile p in GlobalVariables.bullets)
+                        {
+                            GlobalVariables.bullets.Remove(p);
+                            break;
+                        }
                     }
                 }
             }
-
             if (x > 0)
             {
                 if (move == "left")
                 {
-                    x -= speed;
+                    x -= lspeed;
                     characterRec.Location = new Point(x, y);
                 }
             }
             else
             {
-                if (roomx > 0)
+                if (GlobalVariables.enemies.Count == 0)
                 {
-                    x = pnlWidth - 41;
-                    roomx -= 1;
-                    foreach (Projectile p in GlobalVariables.bullets)
+                    if (GlobalVariables.roomx > 0)
                     {
-                        GlobalVariables.bullets.Remove(p);
-                        break;
+                        x = pnlWidth - 41;
+                        GlobalVariables.roomx -= 1;
+                        foreach (Projectile p in GlobalVariables.bullets)
+                        {
+                            GlobalVariables.bullets.Remove(p);
+                            break;
+                        }
                     }
                 }
             }
@@ -86,49 +95,81 @@ namespace Level2Proj2
             {
                 if (move == "up")
                 {
-                    y -= speed;
+                    y -= uspeed;
                     characterRec.Location = new Point(x, y);
                 }
             }
             else
             {
-                if (roomy <= 4)
+                if (GlobalVariables.enemies.Count == 0)
                 {
-                    y = pnlHeight - 41;
-                    roomy += 1;
-                    foreach (Projectile p in GlobalVariables.bullets)
+                    if (GlobalVariables.roomy <= 4)
                     {
-                        GlobalVariables.bullets.Remove(p);
-                        break;
+                        y = pnlHeight - 41;
+                        GlobalVariables.roomy += 1;
+                        foreach (Projectile p in GlobalVariables.bullets)
+                        {
+                            GlobalVariables.bullets.Remove(p);
+                            break;
+                        }
                     }
                 }
-                
             }
             if (y < pnlHeight - 40)
             {
                 if (move == "down")
                 {
-                    y += speed;
+                    y += dspeed;
                     characterRec.Location = new Point(x, y);
                 }
             }
             else
             {
-                if (roomy > 0)
+                if (GlobalVariables.enemies.Count == 0)
                 {
-                    y = 1;
-                    roomy -= 1;
-                    foreach (Projectile p in GlobalVariables.bullets)
+                    if (GlobalVariables.roomy > 0)
                     {
-                        GlobalVariables.bullets.Remove(p);
-                        break;
+                        y = 1;
+                        GlobalVariables.roomy -= 1;
+                        foreach (Projectile p in GlobalVariables.bullets)
+                        {
+                            GlobalVariables.bullets.Remove(p);
+                            break;
+                        }
                     }
                 }
             }
-
         }
-
+        public void pCollision(string move)
+        {
+            if (move == "left" )
+            {
+                lspeed = 0;
+                rspeed = 5;
+                dspeed = 5;
+                uspeed = 5;
+            }
+            if (move == "right")
+            {
+                rspeed = 0;
+                lspeed = 5;
+                dspeed = 5;
+                uspeed = 5;
+            }
+            if (move == "up")
+            {
+                uspeed = 0;
+                rspeed = 5;
+                dspeed = 5;
+                lspeed = 5;
+            }
+            if (move == "down")
+            {
+                dspeed = 0;
+                rspeed = 5;
+                lspeed = 5;
+                uspeed = 5;
+            }
+        }
     }
 }
-
-  

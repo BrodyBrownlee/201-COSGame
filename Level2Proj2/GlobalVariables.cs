@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Level2Proj2
 {
@@ -10,6 +11,8 @@ namespace Level2Proj2
     {
         private static List<Projectile> v_bullets = new List<Projectile>();
         private static List<Enemy> v_enemies = new List<Enemy>();
+        private static int v_roomx, v_roomy;
+       
         public static List<Projectile> bullets
         {
             get { return v_bullets; }
@@ -19,6 +22,16 @@ namespace Level2Proj2
         {
             get { return v_enemies; }
             set { v_enemies = value; }
+        }
+        public static int roomx
+        {
+            get { return v_roomx; }
+            set { v_roomx = value; }
+        }
+        public static int roomy
+        {
+            get { return v_roomy;}
+            set { v_roomy = value;}
         }
     }
 }

@@ -31,20 +31,55 @@ namespace Level2Proj2
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblEnemyHP2 = new System.Windows.Forms.Label();
+            this.lblRems = new System.Windows.Forms.Label();
+            this.lblEnemyHP = new System.Windows.Forms.Label();
             this.lblData = new System.Windows.Forms.Label();
             this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
             this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
+            this.Tmr_Collision = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblEnemyHP2);
+            this.panel1.Controls.Add(this.lblRems);
+            this.panel1.Controls.Add(this.lblEnemyHP);
             this.panel1.Controls.Add(this.lblData);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(799, 451);
+            this.panel1.Size = new System.Drawing.Size(800, 450);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // lblEnemyHP2
+            // 
+            this.lblEnemyHP2.AutoSize = true;
+            this.lblEnemyHP2.Location = new System.Drawing.Point(40, 55);
+            this.lblEnemyHP2.Name = "lblEnemyHP2";
+            this.lblEnemyHP2.Size = new System.Drawing.Size(69, 13);
+            this.lblEnemyHP2.TabIndex = 3;
+            this.lblEnemyHP2.Text = "Enemy HP2: ";
+            // 
+            // lblRems
+            // 
+            this.lblRems.AutoSize = true;
+            this.lblRems.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRems.Location = new System.Drawing.Point(595, 44);
+            this.lblRems.Name = "lblRems";
+            this.lblRems.Size = new System.Drawing.Size(193, 24);
+            this.lblRems.TabIndex = 2;
+            this.lblRems.Text = "Enemies Remaning";
+            // 
+            // lblEnemyHP
+            // 
+            this.lblEnemyHP.AutoSize = true;
+            this.lblEnemyHP.Location = new System.Drawing.Point(40, 29);
+            this.lblEnemyHP.Name = "lblEnemyHP";
+            this.lblEnemyHP.Size = new System.Drawing.Size(63, 13);
+            this.lblEnemyHP.TabIndex = 1;
+            this.lblEnemyHP.Text = "Enemy HP: ";
             // 
             // lblData
             // 
@@ -55,7 +90,6 @@ namespace Level2Proj2
             this.lblData.Size = new System.Drawing.Size(172, 24);
             this.lblData.TabIndex = 0;
             this.lblData.Text = "RoomX + RoomY";
-            this.lblData.Click += new System.EventHandler(this.lblData_Click);
             // 
             // Tmr_Movement
             // 
@@ -68,6 +102,12 @@ namespace Level2Proj2
             this.Tmr_Proj.Enabled = true;
             this.Tmr_Proj.Interval = 500;
             this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
+            // 
+            // Tmr_Collision
+            // 
+            this.Tmr_Collision.Enabled = true;
+            this.Tmr_Collision.Interval = 1;
+            this.Tmr_Collision.Tick += new System.EventHandler(this.Tmr_Collision_Tick);
             // 
             // Form1
             // 
@@ -92,6 +132,10 @@ namespace Level2Proj2
         private System.Windows.Forms.Timer Tmr_Movement;
         private System.Windows.Forms.Timer Tmr_Proj;
         private System.Windows.Forms.Label lblData;
+        private System.Windows.Forms.Label lblEnemyHP;
+        private System.Windows.Forms.Label lblRems;
+        private System.Windows.Forms.Label lblEnemyHP2;
+        private System.Windows.Forms.Timer Tmr_Collision;
     }
 }
 

@@ -55,6 +55,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Object.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\playercharacter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enemy.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Enemy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

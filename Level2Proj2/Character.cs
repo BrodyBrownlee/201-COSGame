@@ -139,37 +139,25 @@ namespace Level2Proj2
                 }
             }
         }
-        public void pCollision(string move)
+        public void pCollision(string move, bool upcollide,bool downcollide,bool leftcollide,bool rightcollide)
         {
-            if (move == "left" )
-            {
-                lspeed = 0;
-                rspeed = 5;
-                dspeed = 5;
-                uspeed = 5;
-            }
-            else if (move == "right")
+            if (leftcollide)
             {
                 rspeed = 0;
-                lspeed = 5;
-                dspeed = 5;
-                uspeed = 5;
             }
-            else if (move == "up")
+            else if (rightcollide)
             {
-                uspeed = 0;
-                rspeed = 5;
-                dspeed = 5;
-                lspeed = 5;
+                lspeed = 0;
             }
-            else if (move == "down")
+            else if (upcollide)
             {
                 dspeed = 0;
-                rspeed = 5;
-                lspeed = 5;
-                uspeed = 5;
             }
-            else
+            else if (downcollide)
+            {
+                uspeed = 0;
+            }
+            else if (move == "none")
             {
                 dspeed = 5;
                 rspeed = 5;

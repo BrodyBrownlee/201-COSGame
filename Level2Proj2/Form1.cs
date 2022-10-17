@@ -15,7 +15,7 @@ namespace Level2Proj2
     public partial class Form1 : Form
     {
         Graphics g;
-        bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot,upcollide,downcollide,leftcollide,rightcollide;
+        bool up, down, left, right, upshoot, downshoot, leftshoot, rightshoot,upcollide,downcollide,leftcollide,rightcollide,eup,edown,eleft,eright;
         string move, shoot;
         int angle, pnlWidth, pnlHeight, NumberOfProjectiles, NumberOfEnemies;
         Player Character = new Player(); //making my player object
@@ -24,6 +24,10 @@ namespace Level2Proj2
         Rectangle[] DownS = new Rectangle[20];
         Rectangle[] RightS = new Rectangle[20];
         Rectangle[] LeftS = new Rectangle[20];
+        /*Rectangle[] EnemyUpS = new Rectangle[20];
+        Rectangle[] EnemyDownS = new Rectangle[20];
+        Rectangle[] EnemyRightS = new Rectangle[20];
+        Rectangle[] EnemyLeftS = new Rectangle[20];*/
         public Form1()
         {
             InitializeComponent();
@@ -86,6 +90,50 @@ namespace Level2Proj2
                     Character.pCollision(move,upcollide,downcollide,leftcollide,rightcollide);
                 }
             }
+            rightcollide = false;
+            upcollide = false;
+            downcollide = false;
+            leftcollide = false;
+            move = "none";
+
+            foreach (Enemy enemy in GlobalVariables.enemies)
+            {
+                enemy.eCollision(move, upcollide, downcollide, leftcollide, rightcollide);
+                for (int i = 0; i < 12; i++)
+                {
+                    if (enemy.enemyRec.IntersectsWith(RightS[i]))
+                    {
+                        rightcollide = true;
+                        enemy.eCollision(move, upcollide, downcollide, leftcollide, rightcollide);
+                    }
+                    if (enemy.enemyRec.IntersectsWith(LeftS[i]))
+                    {
+                        leftcollide = true;
+                        enemy.eCollision(move, upcollide, downcollide, leftcollide, rightcollide);
+                    }
+                    if (enemy.enemyRec.IntersectsWith(DownS[i]))
+                    {
+                        downcollide = true;
+                        enemy.eCollision(move, upcollide, downcollide, leftcollide, rightcollide);
+                    }
+                    if (enemy.enemyRec.IntersectsWith(UpS[i]))
+                    {
+                        upcollide = true;
+                        enemy.eCollision(move, upcollide, downcollide, leftcollide, rightcollide);
+                    }
+                }
+                foreach (Enemy enemy2 in GlobalVariables.enemies)
+                {
+                    if (enemy2 != enemy)
+                    {
+                        if (enemy2.enemyRec.Location.X == enemy.enemyRec.Location.X + enemy.enemyRec.Width)
+                        {
+                           
+                        }
+                    }
+                }
+                }
+
         }
         private void Tmr_Movement_Tick(object sender, EventArgs e)
         {
@@ -170,24 +218,32 @@ namespace Level2Proj2
             }
             for (int i = 0; i < GlobalVariables.enemies.Count; i++)
             {
-                    if (GlobalVariables.enemies[i].enemyRec.X < Character.characterRec.X)
+                eright = false;
+                eleft = false;
+                eup = false;
+                edown = false;
+                GlobalVariables.enemies[i].eMove(eup, edown, eleft, eright);
+                if (GlobalVariables.enemies[i].enemyRec.X < Character.characterRec.X)
                     {
-                        GlobalVariables.enemies[i].enemyRec.X += 1;
+                    eleft = true;
+                    GlobalVariables.enemies[i].eMove(eup,edown,eleft,eright);
                     }
                     if (GlobalVariables.enemies[i].enemyRec.X > Character.characterRec.X)
                     {
-                        GlobalVariables.enemies[i].enemyRec.X -= 1;
-                    }
+                    eright = true;
+                    GlobalVariables.enemies[i].eMove(eup, edown, eleft, eright);
+                }
 
                 if (GlobalVariables.enemies[i].enemyRec.Y < Character.characterRec.Y)
                 {
-                    GlobalVariables.enemies[i].enemyRec.Y += 1;
+                    eup = true;
+                    GlobalVariables.enemies[i].eMove(eup, edown, eleft, eright);
                 }
                     if (GlobalVariables.enemies[i].enemyRec.Y > Character.characterRec.Y)
                     {
-                        GlobalVariables.enemies[i].enemyRec.Y -= 1;
-                    }
-                
+                    edown = true;
+                    GlobalVariables.enemies[i].eMove(eup, edown, eleft, eright);
+                }
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -208,13 +264,13 @@ namespace Level2Proj2
                 g.FillRectangle(Brushes.Yellow, DownS[i]);
 
             }
-            for (int O = 12; O < GlobalVariables.enemies.Count; O++)
+          /*  for (int O = 0; O < GlobalVariables.enemies.Count; O++)
             {
-                g.FillRectangle(Brushes.Red, UpS[O]);
-                g.FillRectangle(Brushes.Green, LeftS[O]);
-                g.FillRectangle(Brushes.Blue, RightS[O]);
-                g.FillRectangle(Brushes.Yellow, DownS[O]);
-            }
+                g.FillRectangle(Brushes.Red, EnemyUpS[O]);
+                g.FillRectangle(Brushes.Green, EnemyLeftS[O]);
+                g.FillRectangle(Brushes.Blue, EnemyRightS[O]);
+                g.FillRectangle(Brushes.Yellow, EnemyDownS[O]);
+            }*/
                 foreach (Enemy O in GlobalVariables.enemies)
             {
                 O.Drawenemy(g);
@@ -270,14 +326,14 @@ namespace Level2Proj2
                 RightS[i] = new Rectangle(Wall[i].wallRec.Right, Wall[i].wallRec.Top + 5, 5, Wall[i].wallRec.Height - 5);
                 LeftS[i] = new Rectangle(Wall[i].wallRec.Left, Wall[i].wallRec.Top + 10, 5, Wall[i].wallRec.Height - 5);
                 DownS[i] = new Rectangle(Wall[i].wallRec.Left, Wall[i].wallRec.Bottom, Wall[i].wallRec.Width, 5);
-            for (int O = 12; O <GlobalVariables.enemies.Count; O++)
+
+          /*  for (int O = 12; O < GlobalVariables.enemies.Count; O++)
                 {
-                    UpS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Top, GlobalVariables.enemies[O].enemyRec.Width, 5);
-                    RightS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Right, GlobalVariables.enemies[O].enemyRec.Top + 5, 5, GlobalVariables.enemies[O].enemyRec.Height - 5);
-                    LeftS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Top + 10, 5, GlobalVariables.enemies[O].enemyRec.Height - 5);
-                    DownS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Bottom, GlobalVariables.enemies[O].enemyRec.Width, 5);
-                }
-               
+                    EnemyUpS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Top, GlobalVariables.enemies[O].enemyRec.Width, 5);
+                    EnemyRightS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Right, GlobalVariables.enemies[O].enemyRec.Top + 5, 5, GlobalVariables.enemies[O].enemyRec.Height - 5);
+                    EnemyLeftS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Top + 10, 5, GlobalVariables.enemies[O].enemyRec.Height - 5);
+                    EnemyDownS[O] = new Rectangle(GlobalVariables.enemies[O].enemyRec.Left, GlobalVariables.enemies[O].enemyRec.Bottom, GlobalVariables.enemies[O].enemyRec.Width, 5);
+                }*/
             }
         }
         private void spawnEnemy()

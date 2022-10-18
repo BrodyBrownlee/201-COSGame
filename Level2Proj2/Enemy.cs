@@ -19,10 +19,10 @@ namespace Level2Proj2
         public int lspeed, rspeed, uspeed, dspeed;
         public Enemy(int xpos, int ypos, int enemywidth, int enemyheight)
         {
-            lspeed = 2;
-            rspeed = 2;
-            uspeed = 2;
-            dspeed = 2;
+            lspeed = 1;
+            rspeed = 1;
+            uspeed = 1;
+            dspeed = 1;
             x = xpos;
             y = ypos;
             width = enemywidth;
@@ -39,50 +39,66 @@ namespace Level2Proj2
         }
         public void eMove(bool eleft, bool eright, bool eup, bool edown)
         {
-            foreach (Enemy O in GlobalVariables.enemies)
-            {
-                for (int i = 0; i < GlobalVariables.enemies.Count; i++)
-                {
-                    if (eleft)
-                    {
-                        GlobalVariables.enemies[i].enemyRec.X += lspeed;
-                    }
-                    if (eright)
-                    {
-                        GlobalVariables.enemies[i].enemyRec.X -= rspeed;
-                    }
-                    if (eup)
-                    {
-                        GlobalVariables.enemies[i].enemyRec.Y += dspeed;
-                    }
-                    if (edown)
-                    {
-                        GlobalVariables.enemies[i].enemyRec.Y -= uspeed;
-                    }
-                }
-              
 
+            for (int i = 0; i < GlobalVariables.enemies.Count; i++)
+            {
+                if (eleft)
+                {
+                    GlobalVariables.enemies[i].enemyRec.X += lspeed;
+                    eleft = false;
+                }
+                if (eright)
+                {
+                    GlobalVariables.enemies[i].enemyRec.X -= rspeed;
+                    eright = false;
+                }
+                if (eup)
+                {
+                    GlobalVariables.enemies[i].enemyRec.Y += dspeed;
+                    eup = false;
+                }
+                if (edown)
+                {
+                    GlobalVariables.enemies[i].enemyRec.Y -= uspeed;
+                    edown = false;
+                }
             }
-          
+
+
+
+
         }
          public void eCollision(string move, bool upcollide, bool downcollide, bool leftcollide, bool rightcollide)
         {
         if (leftcollide)
         {
-            rspeed = 0;
+               for (int i = 0; i < GlobalVariables.enemies.Count; i++)
+                {
+                    GlobalVariables.enemies[i].enemyRec.X -= 2;
+                }
+          
         }
         else if (rightcollide)
         {
-            lspeed = 0;
-        }
+                for (int i = 0; i < GlobalVariables.enemies.Count; i++)
+                {
+                    GlobalVariables.enemies[i].enemyRec.X += 2;
+                }
+            }
         else if (upcollide)
         {
-            dspeed = 0;
-        }
+                for (int i = 0; i < GlobalVariables.enemies.Count; i++)
+                {
+                    GlobalVariables.enemies[i].enemyRec.Y += 2;
+                }
+            }
         else if (downcollide)
         {
-            uspeed = 0;
-        }
+                for (int i = 0; i < GlobalVariables.enemies.Count; i++)
+                {
+                    GlobalVariables.enemies[i].enemyRec.Y -= 2;
+                }
+            }
         else if (move == "none")
         {
             dspeed = 5;

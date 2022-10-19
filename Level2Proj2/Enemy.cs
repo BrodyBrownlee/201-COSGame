@@ -12,6 +12,7 @@ namespace Level2Proj2
         private int x, y, width, height;
         public int speed;
         public Rectangle enemyRec;
+        public Rectangle enemyLeftRec;
         public Image enemy;
         public string Name = "Enemy";
         public int roomx = 3, roomy = 3;
@@ -34,43 +35,31 @@ namespace Level2Proj2
         //drawing the enemy from the form function
         public void Drawenemy(Graphics g)
         {
-
             g.DrawImage(enemy, enemyRec);
         }
         public void eMove(bool eleft, bool eright, bool eup, bool edown)
         {
-
-            for (int i = 0; i < GlobalVariables.enemies.Count; i++)
-            {
                 if (eleft)
                 {
-                    GlobalVariables.enemies[i].enemyRec.X += lspeed;
-                    eleft = false;
+                    enemyRec.X += lspeed;
                 }
                 if (eright)
                 {
-                    GlobalVariables.enemies[i].enemyRec.X -= rspeed;
-                    eright = false;
+                   enemyRec.X -= rspeed;
                 }
                 if (eup)
                 {
-                    GlobalVariables.enemies[i].enemyRec.Y += dspeed;
-                    eup = false;
+                  enemyRec.Y += dspeed;
                 }
                 if (edown)
                 {
-                    GlobalVariables.enemies[i].enemyRec.Y -= uspeed;
-                    edown = false;
+                    enemyRec.Y -= uspeed;
                 }
-            }
-
-
-
-
+                enemyLeftRec = new Rectangle(enemyRec.Location.X, enemyRec.Location.Y, 5, enemyRec.Height);
         }
-         public void eCollision(string move, bool upcollide, bool downcollide, bool leftcollide, bool rightcollide)
+         public void eCollision(string move, bool eup, bool edown, bool eleft, bool eright)
         {
-        if (leftcollide)
+        if (eleft)
         {
                for (int i = 0; i < GlobalVariables.enemies.Count; i++)
                 {
@@ -78,21 +67,21 @@ namespace Level2Proj2
                 }
           
         }
-        else if (rightcollide)
+        else if (eright)
         {
                 for (int i = 0; i < GlobalVariables.enemies.Count; i++)
                 {
                     GlobalVariables.enemies[i].enemyRec.X += 2;
                 }
             }
-        else if (upcollide)
+        else if (eup)
         {
                 for (int i = 0; i < GlobalVariables.enemies.Count; i++)
                 {
                     GlobalVariables.enemies[i].enemyRec.Y += 2;
                 }
             }
-        else if (downcollide)
+        else if (edown)
         {
                 for (int i = 0; i < GlobalVariables.enemies.Count; i++)
                 {

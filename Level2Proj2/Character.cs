@@ -56,7 +56,8 @@ namespace Level2Proj2
                 {
                     if (GlobalVariables.roomx <= 4)
                     {
-                        x = 1;
+                        GlobalVariables.roomChange = true;
+                        x = 51;
                         GlobalVariables.roomx += 1;
                         foreach (Projectile p in GlobalVariables.bullets)
                         {
@@ -80,7 +81,8 @@ namespace Level2Proj2
                 {
                     if (GlobalVariables.roomx > 0)
                     {
-                        x = pnlWidth - 41;
+                        GlobalVariables.roomChange = true;
+                        x = pnlWidth - 91;
                         GlobalVariables.roomx -= 1;
                         foreach (Projectile p in GlobalVariables.bullets)
                         {
@@ -104,7 +106,8 @@ namespace Level2Proj2
                 {
                     if (GlobalVariables.roomy <= 4)
                     {
-                        y = pnlHeight - 41;
+                        GlobalVariables.roomChange = true;
+                        y = pnlHeight - 91;
                         GlobalVariables.roomy += 1;
                         foreach (Projectile p in GlobalVariables.bullets)
                         {
@@ -128,7 +131,8 @@ namespace Level2Proj2
                 {
                     if (GlobalVariables.roomy > 0)
                     {
-                        y = 1;
+                        GlobalVariables.roomChange = true;
+                        y = 51;
                         GlobalVariables.roomy -= 1;
                         foreach (Projectile p in GlobalVariables.bullets)
                         {

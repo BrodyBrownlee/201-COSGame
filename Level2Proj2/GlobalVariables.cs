@@ -12,6 +12,7 @@ namespace Level2Proj2
         private static List<Projectile> v_bullets = new List<Projectile>();
         private static List<Enemy> v_enemies = new List<Enemy>();
         private static int v_roomx, v_roomy;
+        private static bool v_roomChange;
        
         public static List<Projectile> bullets
         {
@@ -32,6 +33,11 @@ namespace Level2Proj2
         {
             get { return v_roomy;}
             set { v_roomy = value;}
+        }
+        public static bool roomChange
+        {
+            get { return v_roomChange; }
+            set { v_roomChange = value;}
         }
     }
 }

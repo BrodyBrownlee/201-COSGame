@@ -24,7 +24,7 @@ namespace Level2Proj2
         Rectangle[] DownS = new Rectangle[20];//making the down sides of the wall and enemies
         Rectangle[] RightS = new Rectangle[20];//making the right sides of the wall and enemies
         Rectangle[] LeftS = new Rectangle[20];//making the left sides of the wall and enemies
-        Rectangle win = new Rectangle();//adding the golden trophy rectangle (the objective)
+        Rectangle winRec = new Rectangle();//adding the golden trophy rectangle (the objective)
         Random pos = new Random();//adding a random to create random x and y values as well as a varying number of enemies
         public Form1()
         {
@@ -290,7 +290,7 @@ namespace Level2Proj2
                     GlobalVariables.enemies[i].enemyLeftRec.Y -= 1;
                 }
             }
-            if (Character.characterRec.IntersectsWith(win))//if the player collides with the trophy
+            if (Character.characterRec.IntersectsWith(winRec))//if the player collides with the trophy
             {
                 GlobalVariables.win = true;
             }
@@ -306,7 +306,7 @@ namespace Level2Proj2
                 tmr_Movement.Enabled = false;
                 tmr_Proj.Enabled = false;
                 tmr_Invincibilty.Enabled = false;
-                win = Rectangle.Empty;
+                winRec = Rectangle.Empty;
                 MessageBox.Show("You found the treasure!");
             }
             pnl_Form.Invalidate();

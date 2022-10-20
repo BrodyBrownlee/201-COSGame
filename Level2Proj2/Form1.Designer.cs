@@ -31,21 +31,24 @@ namespace Level2Proj2
         {
             this.components = new System.ComponentModel.Container();
             this.pnl_Form = new System.Windows.Forms.Panel();
+            this.btnInstructions = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblEnemyHP2 = new System.Windows.Forms.Label();
             this.lblRems = new System.Windows.Forms.Label();
             this.lblEnemyHP = new System.Windows.Forms.Label();
             this.lblData = new System.Windows.Forms.Label();
-            this.Tmr_Movement = new System.Windows.Forms.Timer(this.components);
-            this.Tmr_Proj = new System.Windows.Forms.Timer(this.components);
-            this.Tmr_Collision = new System.Windows.Forms.Timer(this.components);
-            this.Tmr_Door = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Movement = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Proj = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Collision = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Door = new System.Windows.Forms.Timer(this.components);
+            this.tmr_Invincibilty = new System.Windows.Forms.Timer(this.components);
             this.pnl_Form.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnl_Form
             // 
+            this.pnl_Form.Controls.Add(this.btnInstructions);
             this.pnl_Form.Controls.Add(this.btnStart);
             this.pnl_Form.Controls.Add(this.txtName);
             this.pnl_Form.Controls.Add(this.lblEnemyHP2);
@@ -58,6 +61,18 @@ namespace Level2Proj2
             this.pnl_Form.TabIndex = 0;
             this.pnl_Form.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_Form_Paint);
             // 
+            // btnInstructions
+            // 
+            this.btnInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInstructions.Location = new System.Drawing.Point(309, 238);
+            this.btnInstructions.Name = "btnInstructions";
+            this.btnInstructions.Size = new System.Drawing.Size(123, 42);
+            this.btnInstructions.TabIndex = 6;
+            this.btnInstructions.TabStop = false;
+            this.btnInstructions.Text = "Instructions";
+            this.btnInstructions.UseVisualStyleBackColor = true;
+            this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
+            // 
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -65,6 +80,7 @@ namespace Level2Proj2
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(123, 42);
             this.btnStart.TabIndex = 5;
+            this.btnStart.TabStop = false;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -76,6 +92,7 @@ namespace Level2Proj2
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 20);
             this.txtName.TabIndex = 4;
+            this.txtName.TabStop = false;
             this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress_1);
             // 
             // lblEnemyHP2
@@ -116,25 +133,30 @@ namespace Level2Proj2
             this.lblData.TabIndex = 0;
             this.lblData.Text = "RoomX + RoomY";
             // 
-            // Tmr_Movement
+            // tmr_Movement
             // 
-            this.Tmr_Movement.Interval = 10;
-            this.Tmr_Movement.Tick += new System.EventHandler(this.Tmr_Movement_Tick);
+            this.tmr_Movement.Interval = 10;
+            this.tmr_Movement.Tick += new System.EventHandler(this.tmr_Movement_Tick);
             // 
-            // Tmr_Proj
+            // tmr_Proj
             // 
-            this.Tmr_Proj.Interval = 500;
-            this.Tmr_Proj.Tick += new System.EventHandler(this.Tmr_Proj_Tick);
+            this.tmr_Proj.Interval = 500;
+            this.tmr_Proj.Tick += new System.EventHandler(this.tmr_Proj_Tick);
             // 
-            // Tmr_Collision
+            // tmr_Collision
             // 
-            this.Tmr_Collision.Interval = 1;
-            this.Tmr_Collision.Tick += new System.EventHandler(this.Tmr_Collision_Tick);
+            this.tmr_Collision.Interval = 1;
+            this.tmr_Collision.Tick += new System.EventHandler(this.tmr_Collision_Tick);
             // 
-            // Tmr_Door
+            // tmr_Door
             // 
-            this.Tmr_Door.Interval = 1;
-            this.Tmr_Door.Tick += new System.EventHandler(this.Tmr_Door_Tick);
+            this.tmr_Door.Interval = 1;
+            this.tmr_Door.Tick += new System.EventHandler(this.tmr_Door_Tick);
+            // 
+            // tmr_Invincibilty
+            // 
+            this.tmr_Invincibilty.Interval = 1000;
+            this.tmr_Invincibilty.Tick += new System.EventHandler(this.tmr_Invincibilty_Tick);
             // 
             // Form1
             // 
@@ -142,6 +164,7 @@ namespace Level2Proj2
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pnl_Form);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(816, 489);
             this.MinimumSize = new System.Drawing.Size(816, 489);
@@ -159,16 +182,18 @@ namespace Level2Proj2
         #endregion
 
         private System.Windows.Forms.Panel pnl_Form;
-        private System.Windows.Forms.Timer Tmr_Movement;
-        private System.Windows.Forms.Timer Tmr_Proj;
+        private System.Windows.Forms.Timer tmr_Movement;
+        private System.Windows.Forms.Timer tmr_Proj;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.Label lblEnemyHP;
         private System.Windows.Forms.Label lblRems;
         private System.Windows.Forms.Label lblEnemyHP2;
-        private System.Windows.Forms.Timer Tmr_Collision;
-        private System.Windows.Forms.Timer Tmr_Door;
+        private System.Windows.Forms.Timer tmr_Collision;
+        private System.Windows.Forms.Timer tmr_Door;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnInstructions;
+        private System.Windows.Forms.Timer tmr_Invincibilty;
     }
 }
 

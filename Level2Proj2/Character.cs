@@ -14,7 +14,7 @@ namespace Level2Proj2
 {
     class Player
     {
-        private int x, y, width, height;
+        private int x, y, width, height,hp;
         public int lspeed,rspeed,uspeed,dspeed;
         public Rectangle characterRec;
         public Image character;
@@ -30,6 +30,7 @@ namespace Level2Proj2
             rspeed = 5;
             uspeed = 5;
             dspeed = 5;
+            hp = 3;
             character = Properties.Resources.character;
             characterRec = new Rectangle(x, y, width, height);
             GlobalVariables.roomy = 3;
@@ -167,6 +168,14 @@ namespace Level2Proj2
                 rspeed = 5;
                 lspeed = 5;
                 uspeed = 5;
+            }
+        }
+        public void characterDamage()
+        {
+            hp -= 1;
+            if(hp <= 0)
+            {
+                GlobalVariables.defeated = true;
             }
         }
     }

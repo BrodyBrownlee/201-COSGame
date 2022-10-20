@@ -13,7 +13,10 @@ namespace Level2Proj2
         private static List<Enemy> v_enemies = new List<Enemy>();
         private static int v_roomx, v_roomy;
         private static bool v_roomChange;
-       
+        private static bool v_defeated;
+        private static bool v_win;
+
+
         public static List<Projectile> bullets
         {
             get { return v_bullets; }
@@ -38,6 +41,16 @@ namespace Level2Proj2
         {
             get { return v_roomChange; }
             set { v_roomChange = value;}
+        }
+        public static bool defeated
+        {
+            get { return v_defeated; }
+            set { v_defeated = value;}
+        }
+        public static bool win
+        {
+            get { return v_win; }
+            set { v_win = value; }
         }
     }
 }

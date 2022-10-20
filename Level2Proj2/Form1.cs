@@ -160,8 +160,8 @@ namespace Level2Proj2
                   upcollide = false;
               }
           }
-          //setting each value to false so you can move
-          rightcollide = false
+            //setting each value to false so you can move
+            rightcollide = false;
           upcollide = false;
           downcollide = false;
           leftcollide = false;
@@ -389,7 +389,7 @@ namespace Level2Proj2
             {
                 if (GlobalVariables.roomx == 4 && GlobalVariables.roomy == 5)
                 {
-                    win = new Rectangle(380, 210, 40, 40);//trophy rectangle called win(self explanatory)
+                    winRec = new Rectangle(380, 210, 40, 40);//trophy rectangle called win(self explanatory)
                 }
             }
         }
@@ -449,7 +449,7 @@ namespace Level2Proj2
             {
                 if (GlobalVariables.roomx == 4 && GlobalVariables.roomy == 5)
                 {
-                    g.FillRectangle(Brushes.Gold, win);
+                    g.FillRectangle(Brushes.Gold, winRec);
                 }
             }
         }
